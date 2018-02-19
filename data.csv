@@ -2,8 +2,8 @@ symbol,name,mass
 H,Hydrogen,1
 He,Helium,4
 Li,Lithium,7
-Be,Bethium,9
-B,Beryllium,11
+Be,Beryllium,9
+B,Boron,11
 C,Carbon,12
 N,Nitrogen,14
 O,Oxygen,16
@@ -11,16 +11,15 @@ F,Fluorine,19
 Ne,Neon,20
 Na,Sodium,23
 Mg,Magnesium,24
-Al,Aluminium,27
+Al,Aluminum,27
 Si,Silicon,28
 P,Phosphorus,31
 S,Sulfur,32
 Cl,Chlorine,35.5
 Ar,Argon,40
 K,Potassium,39
-Ti,Titanium,48
 Ca,Calcium,40
-Ti,Titanum,48
+Ti,Titanium,48
 Mn,Manganese,55
 Fe,Iron,56
 Cu,Copper,64
@@ -30,3 +29,6 @@ I,Iodine,127
 Ba,Barium,137
 Au,Gold,197
 Br,Bromine,80
+V,Vanadium,51
+Cr,Chromium,52
+Pb,Lead,207
