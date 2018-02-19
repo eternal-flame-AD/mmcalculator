@@ -168,14 +168,12 @@ def symbol_ident(s1,s2):
 def reader(symbols,mass,name):
     while True:
         equ=input('Pls provide a chemical formula, enter exit to stop:')
-        try:
-            equ.index('exit')
+        if 'exit' in equ:
             break
-        except:
-            if equ[0:5]=="calc ":
-                calc.main(equ[5:])
-            else:
-                parse(equ,symbols,mass,name)
+        elif ("*" in equ) or ('/' in equ) or ('+' in equ) or ('-' in equ) or ('^' in equ):
+            calc.main(equ)
+        else:
+            parse(equ,symbols,mass,name)
 
 symbols,mass,name=init()
 reader(symbols,mass,name)
