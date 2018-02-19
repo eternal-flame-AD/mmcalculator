@@ -102,15 +102,16 @@ class Equation:
     def calculate_mass(self):
         sum=0
         for item in self.items:
-            sum+=getmass(item[0],self.mass)*item[1]
+            this=getmass(item[0],self.mass)*item[1]
+            sum+=this
+            print(item[0],'\t',getmass(item[0],self.mass),'g/mol\t * ',item[1],'\t = ',this,'\taccumulate:',sum)
+        print("==================================================================")
         print("Total mass=",sum,"g/mol")
     
     def digest(self):
         self.split_dots()
         self.split_paren()
         self.split_symbols()
-        self.dump()
-        print("====================================")
         self.calculate_mass()
 
 def issymbol(string,symbols):
