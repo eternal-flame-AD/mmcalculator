@@ -167,7 +167,7 @@ def symbol_ident(s1,s2):
 
 def reader(symbols,mass,name):
     while True:
-        equ=input('Pls provide a chemical formula, enter exit to stop:')
+        equ=input('Pls enter a chemical formula or expression, enter exit to stop:')
         if 'exit' in equ:
             break
         elif ("*" in equ) or ('/' in equ) or ('+' in equ) or ('-' in equ) or ('^' in equ):
