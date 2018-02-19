@@ -105,7 +105,7 @@ class Equation:
         for item in self.items:
             this=getmass(item[0],self.mass)*item[1]
             sum+=this
-            print('{0:<3}'.format(item[0]),'{0:<10}'.format(getname(item[0],self.name)),'\t',getmass(item[0],self.mass),'g/mol\t * ',item[1],'\t = ',this,'\taccumulate:',sum)
+            print('{0:<3}'.format(better_looking_symbol(item[0])),'{0:<10}'.format(getname(item[0],self.name)),'\t',getmass(item[0],self.mass),'g/mol\t * ',item[1],'\t = ',this,'\taccumulate:',sum)
         print("==================================================================")
         print("Total mass=",sum,"g/mol")
     
@@ -114,6 +114,12 @@ class Equation:
         self.split_paren()
         self.split_symbols()
         self.calculate_mass()
+
+def better_looking_symbol(s):
+    if len(s)==1:
+        return s[0].upper()
+    else:
+        return s[0].upper()+s[1:].lower()
 
 def issymbol(string,symbols):
     for item in symbols:
