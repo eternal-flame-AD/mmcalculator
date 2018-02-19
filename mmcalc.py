@@ -19,7 +19,7 @@ class Equation:
     def split_dots(self):
         target=self.items[0]
         self.items=[]
-        string=target[0]
+        string=target[0].replace("·",'.')
         while True:
             try:
                 pos=string.index('.')
