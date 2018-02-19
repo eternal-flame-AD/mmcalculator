@@ -1,9 +1,10 @@
 import csv
 class Equation:
-    def __init__(self,symbol,symbols,mass):
+    def __init__(self,symbol,symbols,mass,name):
         self.items=[(symbol,1)]    #should be like [('Mn',1),('Fe',2)]
         self.symbols=symbols
         self.mass=mass
+        self.name=name
     
     def parse_whole_chemical(self,string):
         mult=""
@@ -104,7 +105,7 @@ class Equation:
         for item in self.items:
             this=getmass(item[0],self.mass)*item[1]
             sum+=this
-            print(item[0],'\t',getmass(item[0],self.mass),'g/mol\t * ',item[1],'\t = ',this,'\taccumulate:',sum)
+            print('{0:<3}'.format(item[0]),'{0:<10}'.format(getname(item[0],self.name)),'\t',getmass(item[0],self.mass),'g/mol\t * ',item[1],'\t = ',this,'\taccumulate:',sum)
         print("==================================================================")
         print("Total mass=",sum,"g/mol")
     
@@ -129,34 +130,42 @@ def getmass(s,mass):
             return item[1]
     raise ValueError("ERR:Unknown symbol:",s)
 
+def getname(s,name):
+    for item in name:
+        if symbol_ident(item[0],s):
+            return item[1]
+    raise ValueError("ERR:Unknown symbol:",s)
+
 def readcsv(fn):
     readfile=open(fn)
     return csv.DictReader(readfile)
 
-def parse(equ,symbols,mass):
-    target=Equation(equ,symbols,mass)
+def parse(equ,symbols,mass,name):
+    target=Equation(equ,symbols,mass,name)
     target.digest()
 
 def init():
     data=readcsv('data.csv')
     symbols=[]
     mass=[]
+    name=[]
     for row in data:
         symbols.append(row['symbol'])
         mass.append((row['symbol'],float(row['mass'])))
-    return symbols,mass
+        name.append((row['symbol'],row['name']))
+    return symbols,mass,name
 
 def symbol_ident(s1,s2):
     return s1.upper()==s2.upper()
 
-def reader(symbols,mass):
+def reader(symbols,mass,name):
     while True:
         equ=input('Pls provide a chemical formula, enter exit to stop:')
         try:
             equ.index('exit')
             break
         except:
-            parse(equ,symbols,mass)
+            parse(equ,symbols,mass,name)
 
-symbols,mass=init()
-reader(symbols,mass)
+symbols,mass,name=init()
+reader(symbols,mass,name)
