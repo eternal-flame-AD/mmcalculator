@@ -4,6 +4,7 @@ class Equation:
         self.items=[(symbol,1)]    #should be like [('Mn',1),('Fe',2)]
         self.symbols=symbols
         self.mass=mass
+    
     def parse_whole_chemical(self,string):
         mult=""
         pos=0
@@ -13,6 +14,7 @@ class Equation:
         if mult=="":
             mult="1"
         return (string[pos:],int(mult))
+    
     def split_dots(self):
         target=self.items[0]
         self.items=[]
@@ -25,6 +27,7 @@ class Equation:
             except ValueError:
                 break
         self.items.append(self.parse_whole_chemical(string))
+    
     def split_paren(self):
         items_new=[]
         items_old=self.items
@@ -57,6 +60,7 @@ class Equation:
             if chemical_now!="":
                 items_new.append((chemical_now,mult))
         self.items=items_new
+    
     def split_symbols(self):
         items_new=[]
         items_old=self.items
@@ -90,14 +94,17 @@ class Equation:
                 else:
                     raise ValueError("ERR:Unsplittable expression:",string)
         self.items=items_new
+    
     def dump(self):
         for item in self.items:
             print(item)
+    
     def calculate_mass(self):
         sum=0
         for item in self.items:
             sum+=getmass(item[0],self.mass)*item[1]
         print("Total mass=",sum,"g/mol")
+    
     def digest(self):
         self.split_dots()
         self.split_paren()
@@ -105,18 +112,22 @@ class Equation:
         self.dump()
         print("====================================")
         self.calculate_mass()
+
 def issymbol(string,symbols):
     for item in symbols:
         if symbol_ident(string,item):
             return True
     return False
+
 def isdigit(s):
     return ((s>='0') and (s<='9'))
+
 def getmass(s,mass):
     for item in mass:
         if symbol_ident(item[0],s):
             return item[1]
     raise ValueError("ERR:Unknown symbol:",s)
+
 def readcsv(fn):
     readfile=open(fn)
     return csv.DictReader(readfile)
@@ -136,6 +147,7 @@ def init():
 
 def symbol_ident(s1,s2):
     return s1.upper()==s2.upper()
+
 def reader(symbols,mass):
     while True:
         equ=input('Pls provide a chemical formula, enter exit to stop:')
