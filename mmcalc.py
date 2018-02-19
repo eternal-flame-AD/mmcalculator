@@ -1,4 +1,5 @@
 import csv
+import calc
 class Equation:
     def __init__(self,symbol,symbols,mass,name):
         self.items=[(symbol,1)]    #should be like [('Mn',1),('Fe',2)]
@@ -171,7 +172,10 @@ def reader(symbols,mass,name):
             equ.index('exit')
             break
         except:
-            parse(equ,symbols,mass,name)
+            if equ[0:5]=="calc ":
+                calc.main(equ[5:])
+            else:
+                parse(equ,symbols,mass,name)
 
 symbols,mass,name=init()
 reader(symbols,mass,name)
