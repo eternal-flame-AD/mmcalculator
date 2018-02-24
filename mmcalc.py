@@ -56,6 +56,7 @@ class Equation:
                         digit="1"
                     items_new.append((chemical_now,mult*int(digit)))
                     chemical_now=""
+                    in_paren=False
                 else:
                     chemical_now+=char
                 pos+=1
